@@ -1,0 +1,10 @@
+SELECT 
+  RANK() OVER(ORDER BY SUM(points) DESC) as rank, 
+  CASE WHEN clan = '' then '[no clan specified]' 
+  ELSE clan 
+  END as clan, 
+  SUM(points) as total_points, 
+  count(name) as total_people 
+FROM people
+GROUP BY clan
+ORDER BY total_points DESC
