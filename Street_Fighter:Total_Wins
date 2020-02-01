@@ -1,0 +1,10 @@
+SELECT name, SUM(won) as won, SUM(lost) as lost 
+FROM (
+  SELECT F.name, F.won, F.lost FROM fighters AS F 
+    LEFT JOIN WINNING_MOVES AS WM ON 1 = 1
+    AND F.move_id = WM.id
+  WHERE MOVE NOT IN ('Hadoken','Shouoken','Kikoken')
+) AS MOVES
+GROUP BY name
+ORDER BY SUM(won) DESC
+LIMIT 6
